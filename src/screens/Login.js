@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { login } from '../store/actions/authActions';
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 
-const Login = ({ login, isAuthenticated, error }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ navigation, login, isAuthenticated, error }) => {
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('admin1234');
 
   const handleLogin = () => {
     login(username, password);
   };
 
+  useEffect(() => {
+    if(isAuthenticated) {
+      navigation.navigate("Game");
+    }
+  }, [isAuthenticated])
+  
   useState
   return (
     <View style={styles.container}>
