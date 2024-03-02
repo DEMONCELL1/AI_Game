@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { login } from '../store/actions/authActions';
+import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icons
 
 const Login = ({ login, isAuthenticated, error }) => {
   const [username, setUsername] = useState('');
@@ -13,8 +14,9 @@ const Login = ({ login, isAuthenticated, error }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>Coin Pick</Text>
+      <Text style={styles.logo}><Icon name="gamepad" size={50} color="#fb5b5a" /> Coin Pick</Text>
       <View style={styles.inputView}>
+        <Icon name="user" size={20} color="#FFFFFF" style={styles.icon} />
         <TextInput
           style={styles.inputText}
           placeholder="Username"
@@ -23,6 +25,7 @@ const Login = ({ login, isAuthenticated, error }) => {
         />
       </View>
       <View style={styles.inputView}>
+        <Icon name="lock" size={20} color="#FFFFFF" style={styles.icon} />
         <TextInput
           secureTextEntry
           style={styles.inputText}
@@ -47,23 +50,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
+    flexDirection: 'row',
+    alignItems: 'center',
     fontWeight: 'bold',
     fontSize: 50,
     color: '#fb5b5a',
     marginBottom: 40,
   },
   inputView: {
+    flexDirection: 'row',
     width: '80%',
     backgroundColor: '#465881',
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
-    justifyContent: 'center',
-    padding: 20,
+    alignItems: 'center',
+    paddingLeft: 20,
   },
   inputText: {
+    flex: 1,
     height: 50,
     color: 'white',
+  },
+  icon: {
+    marginRight: 10,
   },
   loginBtn: {
     width: '80%',
@@ -77,6 +87,7 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: 'white',
+    textAlign:'center',
   },
   error: {
     color: 'red',

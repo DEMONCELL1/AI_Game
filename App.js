@@ -16,7 +16,14 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen
+             name="Login" 
+             component={Login}
+             options={{
+              headerShown: false,
+              // gestureEnabled: false
+            }}
+              />
             {/* <Stack.Screen name="Main" component={MainScreen} /> */}
             {/* <Stack.Screen name="History" component={HistoryScreen} /> */}
           </Stack.Navigator>
