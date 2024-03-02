@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Assuming FontAwesome icons are used
-
-const Game = ({navigation}) => {
+import { useFocusEffect } from '@react-navigation/native';
+const Game = ({ navigation }) => {
     const [coins, setCoins] = useState([]);
     // const [unpickedCoins, setUnpickedCoins] = useState([])
     const [message, setMessage] = useState('');
@@ -16,8 +16,16 @@ const Game = ({navigation}) => {
     //     uncpickedCoins.current = [];
     //     setUserPicked([]);
     // }, [])
-    
 
+
+    useFocusEffect(React.useCallback(() => {
+        return () => {
+            setCoins([]);
+            setPickedByUser(false);
+            uncpickedCoins.current = [];
+            setUserPicked([]);
+        }
+    }, []))
     const handlePick = (coinKey) => {
         // if (quantity < 1 || quantity > 4 || quantity > coins) {
         //     setMessage('Invalid quantity');
