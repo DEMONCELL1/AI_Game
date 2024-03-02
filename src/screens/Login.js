@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { login } from '../store/actions/authActions';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icons
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 
 const Login = ({ login, isAuthenticated, error }) => {
   const [username, setUsername] = useState('');
@@ -12,6 +12,7 @@ const Login = ({ login, isAuthenticated, error }) => {
     login(username, password);
   };
 
+  useState
   return (
     <View style={styles.container}>
       <Text style={styles.logo}><Icon name="gamepad" size={50} color="#fb5b5a" /> Coin Pick</Text>
