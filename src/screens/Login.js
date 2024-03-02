@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { login } from '../store/actions/authActions';
-import { connect } from 'react-redux'
 
-const Login = () => {
+const Login = ({ login, isAuthenticated, error }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Logic for handling login
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Add your authentication logic here
     login(username, password);
   };
 
@@ -22,7 +18,7 @@ const Login = () => {
         <TextInput
           style={styles.inputText}
           placeholder="Username"
-          placeholderTextColor="#003f5c"
+          placeholderTextColor="#FFFFFF"
           onChangeText={(text) => setUsername(text)}
         />
       </View>
@@ -31,10 +27,11 @@ const Login = () => {
           secureTextEntry
           style={styles.inputText}
           placeholder="Password"
-          placeholderTextColor="#003f5c"
+          placeholderTextColor="#FFFFFF"
           onChangeText={(text) => setPassword(text)}
         />
       </View>
+      {error && <Text style={styles.error}>{error}</Text>}
       <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
@@ -81,10 +78,15 @@ const styles = StyleSheet.create({
   loginText: {
     color: 'white',
   },
+  error: {
+    color: 'red',
+    marginBottom: 10,
+  },
 });
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-  });
-  
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.auth.error
+});
+
 export default connect(mapStateToProps, { login })(Login);

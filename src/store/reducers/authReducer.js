@@ -2,16 +2,22 @@ const initialState = {
     isAuthenticated: false,
     username: '',
     password: '',
+    error: null
 };
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOGIN':
+        case 'LOGIN_SUCCESS':
             return {
                 ...state,
                 isAuthenticated: true,
-                username: action.payload.username,
-                password: action.payload.password,
+                error: null
+            };
+        case 'LOGIN_FAILURE':
+            return {
+                ...state,
+                isAuthenticated: false,
+                error: 'Invalid username or password'
             };
         case 'LOGOUT':
             return initialState;
